@@ -161,6 +161,7 @@ def questionsss(update, context):
     if update.message.chat.type == 'private':
         user = str(update.message.chat.id)
         if data["process"][user] == "QUESTION1":
+            data['marks'][user] = 0
             if answer == 'Buying and selling @ different platforms':
                 data['marks'][user] = data['marks'][user] + 10
             else:
