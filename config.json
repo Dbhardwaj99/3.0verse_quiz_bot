@@ -1,9 +1,7 @@
 {
-    "api_key" : "5429963376:AAGAD6VoTaGnH7yxQWeYeKbuZOwsL4G_-h0",
-    "admins" : ["748977244"],
-    "intro" : "Welcome to 3.0 verse Official REFERRAL BOT \uD83E\uDD16,\nWe are happy to see your interest in 3.0 verse Quiz competition \uD83D\uDCDD.",
-    "botname" :"trialbot1234_bot",
-    "signup" : 100,
-    "ref" : 100,
+    "api_key" : "5911070506:AAHaAqTK2CqYziV7CUJNKVSH-_OiQO5wCpE",
+    "admins" : ["748977244","1179525564", "5318843805"],
+    "intro" : "We're thrilled to see that you're interested in our 3.0 verse Quiz competition and put your knowledge to the test. Good luck!\uD83D\uDCDD.",
+    "botname" :"threedotOversequiz_bot",
     "detail": "This is an quiz bot"
 }
