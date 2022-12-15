@@ -121,7 +121,6 @@ def final_msg():
 def extra(update, context):
     if update.message.chat.type == 'private':
         user = str(update.message.chat.id)
-
         if data["process"][user] == 'verify':
             started_msg = '''Enter Your Email ID linked to your 3.0 verse account'''
             text = update.message.text.lower()
@@ -183,7 +182,13 @@ def extra(update, context):
                 update.message.reply_text("Enter a Valid Email ID!")
         elif data["process"][user] == 'number':
             number = update.message.text
-            if number.isnumeric():
+            if number[0] == '+':
+                if number[1:].isnumeric():
+                    data['process'][user] = "twitter"
+                    data['number'][user] = number
+                    update.message.reply_text("Enter Your Twitter ID")
+                    json.dump(data, open('users.json', 'w'))
+            elif number.isnumeric():
                 data['process'][user] = "twitter"
                 data['number'][user] = number
                 update.message.reply_text("Enter Your Twitter ID")
@@ -206,77 +211,6 @@ def extra(update, context):
             print(twitter_id)
             reply_markup = ReplyKeyboardMarkup(dash_key, resize_keyboard=True)
             update.message.reply_text(msg, reply_markup=reply_markup)
-
-
-def questionsss(update, context):
-    answer = update.message.text
-    if update.message.chat.type == 'private':
-        print("hi")
-        user = str(update.message.chat.id)
-        if data["process"][user] == "QUESTION1":
-            data['marks'][user] = 0
-            if answer == 'Buying and Selling at different platforms':
-                update.message.reply_text("Correct!")
-                data['marks'][user] = data['marks'][user] + 10
-            else:
-                update.message.reply_text("Oops, Wrong answer!")
-                data['marks'][user] = data['marks'][user] + 0
-            data['process'][user] = "QUESTION2"
-            json.dump(data, open('users.json', 'w'))
-            msg = "Which of the following are centralized exchange??"
-            reply_markup = ReplyKeyboardMarkup(option_keyB, resize_keyboard=True)
-            update.message.reply_text(msg, reply_markup=reply_markup)
-        elif data["process"][user] == "QUESTION2":
-            if answer == 'Binance':
-                update.message.reply_text("Correct!")
-                data['marks'][user] = data['marks'][user] + 10
-            else:
-                update.message.reply_text("Oops, Wrong answer!")
-                data['marks'][user] = data['marks'][user] + 0
-            data['process'][user] = "QUESTION3"
-            json.dump(data, open('users.json', 'w'))
-            msg = "Which one of these are not typical web3 characteristics??"
-            reply_markup = ReplyKeyboardMarkup(option_keyC, resize_keyboard=True)
-            update.message.reply_text(msg, reply_markup=reply_markup)
-        elif data["process"][user] == "QUESTION3":
-            if answer == 'All of above':
-                update.message.reply_text("Correct!")
-                data['marks'][user] = data['marks'][user] + 10
-            else:
-                update.message.reply_text("Oops, Wrong answer!")
-                data['marks'][user] = data['marks'][user] + 0
-            data['process'][user] = "QUESTION4"
-            json.dump(data, open('users.json', 'w'))
-            msg = "Which blockchains support smart contracts??"
-            reply_markup = ReplyKeyboardMarkup(option_keyD, resize_keyboard=True)
-            update.message.reply_text(msg, reply_markup=reply_markup)
-        elif data["process"][user] == "QUESTION4":
-            if answer == 'All of them':
-                update.message.reply_text("Correct!")
-                data['marks'][user] = data['marks'][user] + 10
-            else:
-                update.message.reply_text("Oops, Wrong answer!")
-                data['marks'][user] = data['marks'][user] + 0
-            data['process'][user] = "QUESTION5"
-            json.dump(data, open('users.json', 'w'))
-            msg = "What are the verticals of 3.0 verse"
-            reply_markup = ReplyKeyboardMarkup(option_keyE, resize_keyboard=True)
-            update.message.reply_text(msg, reply_markup=reply_markup)
-        elif data["process"][user] == "QUESTION5":
-            if answer == 'All of the above':
-                update.message.reply_text("Correct!")
-                data['marks'][user] = data['marks'][user] + 10
-            else:
-                update.message.reply_text("Oops, Wrong answer!")
-                data['marks'][user] = data['marks'][user] + 0
-            data['process'][user] = "finished"
-            json.dump(data, open('users.json', 'w'))
-            update.message.reply_text(f'''\n\nHurray!! 🎉 Your entry is recorded for participating in 3.0 verse Quiz competition 📝. You are currently at no. {data['total'] + 100} on Leaderboard 🎯, you may share your unique referral link with your family and friends 👥 to top the leaderboard.''')
-            msg3 = '''Happy referring and keep topping the leaderboard 🚀🚀.'''
-            update.message.reply_text('The more no of people participating in the 3.0 Quiz competition with your referral link the more is the chance of you topping the Leaderboard.')
-            update.message.reply_text('The leaderboard would be displayed in the telegram channel t.me/real3verse on 22/12/2022 at 2:30 PM (GMT+4) ⏳ .')
-            reply_markup = ReplyKeyboardMarkup(dash_key, resize_keyboard=True)
-            update.message.reply_text(msg3, reply_markup=reply_markup)
 
 
 def ref(update, context):
@@ -373,6 +307,100 @@ def yess(update, context):
         print("hello")
 
 
+def questionn1(update, context):
+    answer = update.message.text
+    if update.message.chat.type == 'private':
+        print("hi")
+        user = str(update.message.chat.id)
+        if data["process"][user] == "QUESTION1":
+            data['marks'][user] = 0
+            if answer == 'Buying and Selling at different platforms':
+                update.message.reply_text("Correct!")
+                data['marks'][user] = data['marks'][user] + 10
+            else:
+                update.message.reply_text("Oops, Wrong answer!")
+                data['marks'][user] = data['marks'][user] + 0
+            data['process'][user] = "QUESTION2"
+            json.dump(data, open('users.json', 'w'))
+            msg = "Which of the following are centralized exchange??"
+            reply_markup = ReplyKeyboardMarkup(option_keyB, resize_keyboard=True)
+            update.message.reply_text(msg, reply_markup=reply_markup)
+
+def questionn2(update, context):
+    answer = update.message.text
+    if update.message.chat.type == 'private':
+        print("hi")
+        user = str(update.message.chat.id)
+        if data["process"][user] == "QUESTION2":
+            if answer == 'Binance':
+                update.message.reply_text("Correct!")
+                data['marks'][user] = data['marks'][user] + 10
+            else:
+                update.message.reply_text("Oops, Wrong answer!")
+                data['marks'][user] = data['marks'][user] + 0
+            data['process'][user] = "QUESTION3"
+            json.dump(data, open('users.json', 'w'))
+            msg = "Which one of these are not typical web3 characteristics??"
+            reply_markup = ReplyKeyboardMarkup(option_keyC, resize_keyboard=True)
+            update.message.reply_text(msg, reply_markup=reply_markup)
+
+def questionn3(update, context):
+    answer = update.message.text
+    if update.message.chat.type == 'private':
+        print("hi")
+        user = str(update.message.chat.id)
+        if data["process"][user] == "QUESTION3":
+            if answer == 'All of above':
+                update.message.reply_text("Correct!")
+                data['marks'][user] = data['marks'][user] + 10
+            else:
+                update.message.reply_text("Oops, Wrong answer!")
+                data['marks'][user] = data['marks'][user] + 0
+            data['process'][user] = "QUESTION4"
+            json.dump(data, open('users.json', 'w'))
+            msg = "Which blockchains support smart contracts??"
+            reply_markup = ReplyKeyboardMarkup(option_keyD, resize_keyboard=True)
+            update.message.reply_text(msg, reply_markup=reply_markup)
+
+def questionn4(update, context):
+    answer = update.message.text
+    if update.message.chat.type == 'private':
+        print("hi")
+        user = str(update.message.chat.id)
+        if data["process"][user] == "QUESTION4":
+            if answer == 'All of them':
+                update.message.reply_text("Correct!")
+                data['marks'][user] = data['marks'][user] + 10
+            else:
+                update.message.reply_text("Oops, Wrong answer!")
+                data['marks'][user] = data['marks'][user] + 0
+            data['process'][user] = "QUESTION5"
+            json.dump(data, open('users.json', 'w'))
+            msg = "What are the verticals of 3.0 verse"
+            reply_markup = ReplyKeyboardMarkup(option_keyE, resize_keyboard=True)
+            update.message.reply_text(msg, reply_markup=reply_markup)
+
+def questionn5(update, context):
+    answer = update.message.text
+    if update.message.chat.type == 'private':
+        print("hi")
+        user = str(update.message.chat.id)
+        if data["process"][user] == "QUESTION5":
+            if answer == 'All of the above':
+                update.message.reply_text("Correct!")
+                data['marks'][user] = data['marks'][user] + 10
+            else:
+                update.message.reply_text("Oops, Wrong answer!")
+                data['marks'][user] = data['marks'][user] + 0
+            data['process'][user] = "finished"
+            json.dump(data, open('users.json', 'w'))
+            update.message.reply_text(f'''\n\nHurray!! 🎉 Your entry is recorded for participating in 3.0 verse Quiz competition 📝. You are currently at no. {data['total'] + 100} on Leaderboard 🎯, you may share your unique referral link with your family and friends 👥 to top the leaderboard.''')
+            msg3 = '''Happy referring and keep topping the leaderboard 🚀🚀.'''
+            update.message.reply_text('The more no of people participating in the 3.0 Quiz competition with your referral link the more is the chance of you topping the Leaderboard.')
+            update.message.reply_text('The leaderboard would be displayed in the telegram channel t.me/real3verse on 22/12/2022 at 2:30 PM (GMT+4) ⏳ .')
+            reply_markup = ReplyKeyboardMarkup(dash_key, resize_keyboard=True)
+            update.message.reply_text(msg3, reply_markup=reply_markup)
+
 if __name__ == '__main__':
     data = json.load(open('users.json', 'r'))
     updater = Updater(TOKEN, use_context=True)
@@ -382,26 +410,32 @@ if __name__ == '__main__':
     dp.add_handler(MessageHandler(Filters.regex('^Users$'), users))
     dp.add_handler(MessageHandler(Filters.regex('^Get List$'), get_file))
     dp.add_handler(MessageHandler(Filters.regex('^Referral Link$'), link))
-    dp.add_handler(MessageHandler(Filters.regex('^Buying and Selling at different platforms'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Buying and selling on same platform$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Buying only on one platform$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Selling only on one platform$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Binance$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^dYdX$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^UniSwap$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^PancakeSwap$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Decentralisation$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Data ownership$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Speed$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^All of above$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Binance Smart Chain$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Ethereum$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^Solana$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^All of them$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^3.0 Wire$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^3.0 University$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^3.0 TV$'), questionsss))
-    dp.add_handler(MessageHandler(Filters.regex('^All of the above$'), questionsss))
+
+    dp.add_handler(MessageHandler(Filters.regex('^Buying and Selling at different platforms'), questionn1))
+    dp.add_handler(MessageHandler(Filters.regex('^Buying and selling on same platform$'), questionn1))
+    dp.add_handler(MessageHandler(Filters.regex('^Buying only on one platform$'), questionn1))
+    dp.add_handler(MessageHandler(Filters.regex('^Selling only on one platform$'), questionn1))
+
+    dp.add_handler(MessageHandler(Filters.regex('^Binance$'), questionn2))
+    dp.add_handler(MessageHandler(Filters.regex('^dYdX$'), questionn2))
+    dp.add_handler(MessageHandler(Filters.regex('^UniSwap$'), questionn2))
+    dp.add_handler(MessageHandler(Filters.regex('^PancakeSwap$'), questionn2))
+
+    dp.add_handler(MessageHandler(Filters.regex('^Decentralisation$'), questionn3))
+    dp.add_handler(MessageHandler(Filters.regex('^Data ownership$'), questionn3))
+    dp.add_handler(MessageHandler(Filters.regex('^Speed$'), questionn3))
+    dp.add_handler(MessageHandler(Filters.regex('^All of above$'), questionn3))
+
+    dp.add_handler(MessageHandler(Filters.regex('^Binance Smart Chain$'), questionn4))
+    dp.add_handler(MessageHandler(Filters.regex('^Ethereum$'), questionn4))
+    dp.add_handler(MessageHandler(Filters.regex('^Solana$'), questionn4))
+    dp.add_handler(MessageHandler(Filters.regex('^All of them$'), questionn4))
+
+    dp.add_handler(MessageHandler(Filters.regex('^3.0 Wire$'), questionn5))
+    dp.add_handler(MessageHandler(Filters.regex('^3.0 University$'), questionn5))
+    dp.add_handler(MessageHandler(Filters.regex('^3.0 TV$'), questionn5))
+    dp.add_handler(MessageHandler(Filters.regex('^All of the above$'), questionn5))
+
     dp.add_handler(MessageHandler(Filters.regex('^Yes$'), yess))
     dp.add_handler(MessageHandler(Filters.regex('^Referred$'), ref))
     dp.add_handler(MessageHandler(Filters.regex('^No$'), extra))
