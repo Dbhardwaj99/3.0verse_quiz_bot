@@ -326,6 +326,7 @@ def questionn1(update, context):
             reply_markup = ReplyKeyboardMarkup(option_keyB, resize_keyboard=True)
             update.message.reply_text(msg, reply_markup=reply_markup)
 
+
 def questionn2(update, context):
     answer = update.message.text
     if update.message.chat.type == 'private':
@@ -343,6 +344,7 @@ def questionn2(update, context):
             msg = "Which one of these are not typical web3 characteristics??"
             reply_markup = ReplyKeyboardMarkup(option_keyC, resize_keyboard=True)
             update.message.reply_text(msg, reply_markup=reply_markup)
+
 
 def questionn3(update, context):
     answer = update.message.text
@@ -362,6 +364,7 @@ def questionn3(update, context):
             reply_markup = ReplyKeyboardMarkup(option_keyD, resize_keyboard=True)
             update.message.reply_text(msg, reply_markup=reply_markup)
 
+
 def questionn4(update, context):
     answer = update.message.text
     if update.message.chat.type == 'private':
@@ -379,6 +382,7 @@ def questionn4(update, context):
             msg = "What are the verticals of 3.0 verse"
             reply_markup = ReplyKeyboardMarkup(option_keyE, resize_keyboard=True)
             update.message.reply_text(msg, reply_markup=reply_markup)
+
 
 def questionn5(update, context):
     answer = update.message.text
@@ -400,6 +404,7 @@ def questionn5(update, context):
             update.message.reply_text('The leaderboard would be displayed in the telegram channel t.me/real3verse on 22/12/2022 at 2:30 PM (GMT+4) ⏳ .')
             reply_markup = ReplyKeyboardMarkup(dash_key, resize_keyboard=True)
             update.message.reply_text(msg3, reply_markup=reply_markup)
+
 
 if __name__ == '__main__':
     data = json.load(open('users.json', 'r'))
